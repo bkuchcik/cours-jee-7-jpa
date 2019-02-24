@@ -67,7 +67,7 @@ tasks.getByName<JavaCompile>("compileTestJava") {
     targetCompatibility = javaVersion
 }
 
-val mainClass = "fr.isima.server.ServerKt"
+val mainClass = "fr.isima.server.Server"
 tasks.getByName<BootJar>("bootJar") {
     mainClassName = mainClass
 }
