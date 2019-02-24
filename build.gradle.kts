@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
-    war
+    application
     id("org.jetbrains.kotlin.jvm") version "1.3.11" apply false
     id("org.springframework.boot") version "2.1.2.RELEASE" apply false
     id("org.jetbrains.kotlin.plugin.allopen") version "1.3.11" apply false
@@ -60,6 +60,8 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter-tomcat")
         implementation("org.springframework.boot:spring-boot-starter-security")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+        implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+        implementation("org.springframework.boot:spring-boot-devtools")
         implementation("com.h2database:h2")
         implementation("javax.servlet:jstl")
         implementation("org.apache.tomcat.embed:tomcat-embed-jasper")
