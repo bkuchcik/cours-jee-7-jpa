@@ -11,22 +11,33 @@ import fr.isima.data.QuoteBean;
 public class Quote {
 
 
-    /**
-     * Le champ est final, il doit donc �tre initialis� dans le constructeur.
-     */
-    private final QuoteBean quoteBean;
+    private final String author;
 
-    public Quote(QuoteBean quoteBean) {
-        this.quoteBean = quoteBean;
+    private final String content;
+
+    private final Integer id;
+
+    public Quote(String author, String content, Integer id) {
+        this.author = author;
+        this.content = content;
+        this.id = id;
+    }
+
+    public Quote(String author, String content) {
+        this(author,content,null);
     }
 
     public String getAuthor() {
-        return quoteBean.getAuthor();
+        return author;
     }
 
     public String getContent() {
-        return quoteBean.getContent();
+        return content;
     }
 
-    public Integer getId() {return quoteBean.getId();}
+    public Integer getId() {
+        return id;
+    }
+
+
 }

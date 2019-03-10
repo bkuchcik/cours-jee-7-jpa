@@ -1,5 +1,6 @@
 package fr.isima.controller;
 
+import fr.isima.business.Quote;
 import fr.isima.business.QuotesService;
 import fr.isima.data.QuoteBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,11 @@ public class QuotesMVCController {
     }
 
     @PostMapping(consumes = {"*"})
-    public String displayQuote( QuoteBean quoteBean) {
-        quotesService.save(quoteBean);
+    public String displayQuote(QuoteForm quoteForm) {
+        //we could use buid
+        //this kind of code is really easy in Kotlin with named parameter
+        final Quote quote = new Quote(quoteForm.getAuthor(), quoteForm.getContent(), quoteForm.getId());
+        quotesService.save(quote);
         return "redirect:/main";
     }
 

@@ -20,12 +20,16 @@ public class QuotesService {
 
     public Quotes findAll() {
         return new Quotes(StreamSupport.stream(this.quotesRepository.findAll().spliterator(), false)
-                .map(Quote::new).collect(Collectors.toList()));
+                .map(quoteBean -> toQuote(quoteBean)).collect(Collectors.toList()));
+    }
+
+    private Quote toQuote(QuoteBean quoteBean) {
+        return new Quote(quoteBean.getAuthor(),quoteBean.getContent(),quoteBean.getId());
     }
 
     public SelectedQuote findById(Integer quoteId) {
         if (quotesRepository.existsById(quoteId)) {
-            return new SelectedQuote(findAll(), new Quote(this.quotesRepository.findById(quoteId).get()));
+            return new SelectedQuote(findAll(), toQuote(this.quotesRepository.findById(quoteId).get()));
         }
         return createDefaultQuote(quoteId);
     }
@@ -34,11 +38,15 @@ public class QuotesService {
         final QuoteBean qb = new QuoteBean();
         qb.setAuthor("L'auteur de l'application");
         qb.setContent("Aucune citation n'existe au numero " + numero);
-        return new SelectedQuote(findAll(), new Quote(qb));
+        return new SelectedQuote(findAll(), toQuote(qb));
     }
 
 
-    public Integer save(QuoteBean quoteBean) {
+    public Integer save(Quote quote) {
+        final QuoteBean quoteBean = new QuoteBean();
+        quoteBean.setAuthor(quote.getAuthor());
+        quoteBean.setContent(quote.getContent());
+        quoteBean.setId(quote.getId());
         return this.quotesRepository.save(quoteBean).getId();
     }
 }
