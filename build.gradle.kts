@@ -3,7 +3,8 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
     application
-    id("org.springframework.boot") version "2.1.2.RELEASE" apply false
+    id("org.springframework.boot") version "2.7.10"
+    id("io.spring.dependency-management") version "1.1.0"
 }
 
 group = "fr.isima"
@@ -11,31 +12,15 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     gradlePluginPortal()
-}
-
-
-buildscript {
-    repositories {
-        gradlePluginPortal()
-    }
-
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.2.RELEASE")
-    }
-}
-apply(plugin = "io.spring.dependency-management")
-apply(plugin = "org.springframework.boot")
-
-repositories {
     jcenter()
     mavenCentral()
 }
 
 dependencies {
-    compile(group = "io.vavr", name = "vavr", version = "0.9.2")
-    compile("com.fasterxml.jackson.core:jackson-databind:2.9.8")
-    compile("org.apache.commons:commons-lang3:3.8.1")
-    compile("javax.inject:javax.inject:1")
+    implementation(group = "io.vavr", name = "vavr", version = "0.9.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.9.8")
+    implementation("org.apache.commons:commons-lang3:3.8.1")
+    implementation("javax.inject:javax.inject:1")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-tomcat")
     implementation("org.springframework.boot:spring-boot-starter-security")
@@ -46,9 +31,9 @@ dependencies {
     implementation("javax.servlet:jstl")
     implementation("org.apache.tomcat.embed:tomcat-embed-jasper")
 
-    testCompile("org.assertj:assertj-core:3.8.0")
-    testCompile("org.mockito:mockito-core:2.13.0")
-    testCompile("junit:junit:4.12")
+    testImplementation("org.assertj:assertj-core:3.8.0")
+    testImplementation("org.mockito:mockito-core:2.13.0")
+    testImplementation("junit:junit:4.12")
 }
 
 //reload resources dinamycally
@@ -67,11 +52,4 @@ tasks.getByName<JavaCompile>("compileTestJava") {
     targetCompatibility = javaVersion
 }
 
-val mainClass = "fr.isima.server.Server"
-tasks.getByName<BootJar>("bootJar") {
-    mainClassName = mainClass
-}
 
-application {
-    mainClassName = mainClass
-}
