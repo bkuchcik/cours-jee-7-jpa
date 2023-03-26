@@ -1,7 +1,5 @@
 package fr.isima.business;
 
-import fr.isima.data.QuoteBean;
-
 /**
  * L'objet immuable contenant les citations
  *
@@ -9,7 +7,6 @@ import fr.isima.data.QuoteBean;
  * @see Quotes
  */
 public class Quote {
-
 
     private final String author;
 
@@ -24,7 +21,7 @@ public class Quote {
     }
 
     public Quote(String author, String content) {
-        this(author,content,null);
+        this(author, content, null);
     }
 
     public String getAuthor() {

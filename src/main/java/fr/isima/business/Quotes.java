@@ -20,11 +20,6 @@ public class Quotes {
         return quotes.size();
     }
 
-
-    static Quotes createQuotes(Quote... quotes) {
-        return new Quotes(Arrays.asList(quotes));
-    }
-
     public static Quotes empty() {
         return new Quotes(Arrays.asList());
     }
