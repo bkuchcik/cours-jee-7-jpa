@@ -1,4 +1,3 @@
-import org.springframework.boot.gradle.tasks.bundling.BootJar
 import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
@@ -31,9 +30,10 @@ dependencies {
     implementation("javax.servlet:jstl")
     implementation("org.apache.tomcat.embed:tomcat-embed-jasper")
 
-    testImplementation("org.assertj:assertj-core:3.8.0")
-    testImplementation("org.mockito:mockito-core:2.13.0")
-    testImplementation("junit:junit:4.12")
+    testImplementation(platform("org.junit:junit-bom:5.9.2"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.assertj:assertj-core:3.24.2")
+    testImplementation("org.mockito:mockito-core:5.2.0")
 }
 
 //reload resources dinamycally
@@ -52,4 +52,10 @@ tasks.getByName<JavaCompile>("compileTestJava") {
     targetCompatibility = javaVersion
 }
 
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
 
